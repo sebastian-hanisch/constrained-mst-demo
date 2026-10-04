@@ -86,7 +86,7 @@ Hier wird gemessen, **was jede Grenze kostet**, ob die einfachen Greedy-Verfahre
 )
 st.caption(
     "Setzt auf [kruskal-demo](https://github.com/sebastian-hanisch/kruskal-demo), [prim-demo](https://github.com/sebastian-hanisch/prim-demo) und [arborescence-demo](https://github.com/sebastian-hanisch/arborescence-demo) auf "
-    "(der Kruskal-Baum ist hier der Ausgangspunkt). Geplante Nachfolger (nicht gebaut): Kapazitierter MST, Steiner-Baum, Prize-Collecting Steiner-Baum, Sensitivität, zufällige Spannbäume."
+    "(der Kruskal-Baum ist hier der Ausgangspunkt). Nachfolger in der Reihe: [cmst-demo](https://github.com/sebastian-hanisch/cmst-demo) (Kapazitierter MST), [steiner-tree-demo](https://github.com/sebastian-hanisch/steiner-tree-demo), [pcst-demo](https://github.com/sebastian-hanisch/pcst-demo) (Prize-Collecting Steiner-Baum), [mst-sensitivity-demo](https://github.com/sebastian-hanisch/mst-sensitivity-demo) (Sensitivität), [random-spanning-tree-demo](https://github.com/sebastian-hanisch/random-spanning-tree-demo) (zufällige Spannbäume)."
 )
 
 with st.expander("Die drei Nebenbedingungen", expanded=True):
@@ -146,7 +146,7 @@ with st.sidebar:
                                   help="Erzeugt Gleichstände; die Bäume bleiben durch den Schlüssel (Kosten, Kantenindex) eindeutig.")
         if kind == "hubs":
             sats = st.slider("Anschlüsse je Verteiler", *bounds("sats_select"), value=int(ss["sats_select"]), key="sats_widget", on_change=store_from_widget, args=("sats_select",),
-                             help="Anschlussnehmer im Kreis um jeden Verteiler. Bei 5 hat der MST Knoten mit Grad 5, bei 6 und mehr liegen die Nachbarn im Kreis näher beieinander als am Verteiler.")
+                             help="Anschlussnehmer im Kreis um jeden Verteiler. Bei 5 hat der MST Knoten mit Grad 5, bei 6 liegen die Nachbarn im Kreis etwa so weit voneinander wie vom Verteiler, ab 7 näher beieinander.")
         else:
             sats = C.DEFAULT_SATS
         seed = st.number_input("Zufalls-Seed der Instanz", *bounds("seed_input"), value=int(ss["seed_input"]), key="seed_widget", step=1, on_change=store_from_widget, args=("seed_input",))
@@ -388,7 +388,7 @@ st.markdown(
 | **Kruskal/Prim mit Grenze finden einen Baum** | Nein. Bei Δ = 2 scheitern sie in 20 % der Instanzen (Ortschaften: 60 %), obwohl ein Baum existiert; Lagrange scheitert dort nie. Prim mit Tiefengrenze scheitert bei H = 4 auf 20 Filialen in 80 % der Instanzen. | - |
 | **Greedy ist nah am Optimum** | Nur bei lockerer Grenze. Bei H = 4 auf 12 Filialen liegt Greedy +9.4 % über dem MST, der exakte Wert nur +6.49 %; die Lokalsuche bleibt in Nachbarschaften stecken. | Stärkere Metaheuristiken (nicht gebaut) |
 | **Exakt lösbar** | Nur klein: das Branch-and-Bound wird bis n = 24 (Grad) bzw. n = 12 (Hops) angeboten und ist bei enger Hop-Grenze (H = 2) auch dort nicht immer fertig. Große Instanzen brauchen Branch-and-Cut (nicht gebaut). | Layered-Graph-/Schnittformulierungen (Gouveia u. a., nicht gebaut) |
-| **Für Hops gibt es eine Untergrenze** | Hier nur der MST selbst - viel zu schwach; die Lücke der Hop-Heuristik ist ab n = 20 nicht mehr messbar. | Lagrange/LP für Hops (nicht gebaut) |
+| **Für Hops gibt es eine Untergrenze** | Hier nur der MST selbst - viel zu schwach; die Lücke der Hop-Heuristik ist ab n = 13 nicht mehr messbar. | Lagrange/LP für Hops (nicht gebaut) |
 | **Euklidisch** | Der Satz "MST-Grad ≤ 6" gilt nur ohne Geländezuschlag; mit Zuschlag 1.0 kamen Grad 5 und 6 vor, in Ortschaften mit 5 Anschlüssen liegt der MST-Grad fast immer bei 5. | - |
 | **Synthetisches Modell** | Punkte im Quadrat, k nächste Nachbarn, ein Depot; keine Kapazitäten (Folgestück Kapazitierter MST), keine echten Netze. Approximationsalgorithmen für Grad- und Längenbeschränkung (Fürer-Raghavachari, Haeupler u. a.) sind nicht gebaut. | Echte Netze, Approximationsverfahren |
 """
@@ -424,6 +424,6 @@ Implementiert in `cons_algorithm.py` (Verfahren), `cons_scenario.py` (Instanzen)
 st.markdown("---")
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
-    "Operations Research und Machine Learning. Interesse an einer maßgeschneiderten Lösung für "
-    "Ihr Unternehmen? [Kontakt aufnehmen](https://sebastianhanisch.net/kontakt.html)"
+    "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
+    "Mehr zur Reihe: [Spannbäume: vom Kruskal bis zum Zufallsbaum](https://sebastianhanisch.net/konzepte-spannbaum.html)."
 )

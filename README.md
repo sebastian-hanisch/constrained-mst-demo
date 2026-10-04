@@ -13,10 +13,10 @@ Kruskal (Wurzel)                                                                
  ├─ Euklidischer MST (keine n²-Kantenliste, Delaunay)                                      [gebaut: euclidean-mst-demo]
  ├─ Gerichteter Spannbaum (Chu-Liu/Edmonds)                                                [gebaut: arborescence-demo]
  ├─ Bottleneck-/Grad-/Hop-beschränkter Spannbaum                                           [DIESES STÜCK]
- │    └─ Kapazitierter MST                                                                 [nicht gebaut]
- ├─ Steiner-Baum → Prize-Collecting Steiner-Baum                                           [nicht gebaut]
- ├─ MST-Sensitivität & dynamischer MST                                                     [nicht gebaut]
- └─ Zufällige Spannbäume & Kirchhoff                                                       [nicht gebaut]
+ │    └─ Kapazitierter MST                                                                 [gebaut: cmst-demo]
+ ├─ Steiner-Baum → Prize-Collecting Steiner-Baum                                           [gebaut: steiner-tree-demo, pcst-demo]
+ ├─ MST-Sensitivität & dynamischer MST                                                     [gebaut: mst-sensitivity-demo]
+ └─ Zufällige Spannbäume & Kirchhoff                                                       [gebaut: random-spanning-tree-demo]
 ```
 
 Ergebnis in Kürze: **Der MST ist bottleneck-optimal, aber "bottleneck-optimal" sagt fast nichts (es gibt auf 20 Filialen im Median 10^10,6 solche Bäume, der teuerste kostet 74 % mehr). Die Gradgrenze kostet auf gleichverteilten Instanzen erst bei Δ = 2 etwas (+7,29 % bei 20 Filialen), in Ortschaften schon bei Δ = 3 (+1,06 %). Die Hop-Grenze ist teurer und stark nichtlinear (12 Filialen: H = 6 +1,4 %, H = 3 +15,1 %, H = 1 +134 %). Kruskal/Prim mit Grenze scheitern oft, obwohl ein gültiger Baum existiert (Δ = 2: 20 % der Instanzen, Prim mit Tiefengrenze bei H = 4 auf 20 Filialen 80 %); Lagrange und der Schichtenbaum fanden in allen gemessenen Konfigurationen einen Baum, wo ein anderes Verfahren einen fand.** Die Lagrange-Untergrenze schließt die Lücke bei kleinen Instanzen ganz.
@@ -80,11 +80,11 @@ Die Einzelinstanz weicht von den Medianen ab - die Mediane sind die belastbaren 
 - **Erwartung "die Hop-Grenze senkt den Umweg deutlich" - nur teilweise:** der größte Umweg sinkt von 2,25 (MST) nur bei H = 1 auf 1,00 und bei H = 3 auf 1,59; bei H = 2 bleibt er bei 2,20, bei H = 4 bis 6 bei 1,90. Wer den Umweg kaufen will, zahlt viel (+15,1 % für H = 3), und die längste Kante steigt mit (+21,9 % bei H = 3).
 - **Greedy-Verfahren sind nicht nur schlechter, sondern scheitern:** Kruskal/Prim mit Gradgrenze enden im Wald oder stecken fest, obwohl ein Baum existiert (per Skriptsuche gefundene Kleinstinstanzen sind als Test festgeschrieben); Prim mit Tiefengrenze ebenso. Die Aufschläge der Verfahren sind nur über die Instanzen mit gültigem Baum gemessen - die Ausfälle sind meist die schweren Instanzen, deshalb sind die Preise verschiedener Verfahren nicht direkt vergleichbar (die App weist zusätzlich den Aufschlag gegen den besten Fund aus).
 - **Auch Lagrange kann leer ausgehen:** Ortschaften mit 6 Anschlüssen, 30 Filialen, Δ = 2, Seed 100002: kein Verfahren findet einen gültigen Baum; ob einer existiert, ist offen (das Exaktverfahren wird bei n = 30 nicht angeboten) - die App sagt dann "Kein Verfahren fand einen gültigen Baum", nicht "es gibt keinen".
-- **Exakt ist klein:** das Branch-and-Bound wird bis n = 24 (Grad) bzw. n = 12 (Hops) angeboten und ist bei enger Hop-Grenze (H = 2, 12 Filialen: in keiner der 5 Instanzen fertig) auch dort nicht immer fertig; ab n = 16 (Hops) misst die Demo keine Lücke der Heuristik mehr. **Für Hops gibt es keine Lagrange-Untergrenze** (nur den MST). Branch-and-Cut, Layered-Graph-Formulierungen (Gouveia u. a.) sind nicht gebaut.
+- **Exakt ist klein:** das Branch-and-Bound wird bis n = 24 (Grad) bzw. n = 12 (Hops) angeboten und ist bei enger Hop-Grenze (H = 2, 12 Filialen: in keiner der 5 Instanzen fertig) auch dort nicht immer fertig; ab n = 13 (Hops) misst die Demo keine Lücke der Heuristik mehr. **Für Hops gibt es keine Lagrange-Untergrenze** (nur den MST). Branch-and-Cut, Layered-Graph-Formulierungen (Gouveia u. a.) sind nicht gebaut.
 - **Aufwand ist nicht das Thema dieses Stücks:** die Demo vergleicht Kosten und Gültigkeit, keine Laufzeit und keine Elementarschritte; das Branch-and-Bound zählt nur Suchknoten (die Zahl wird bei den Presets genannt).
 - **Synthetisches Modell:** Punkte im Quadrat, k nächste Nachbarn, ein Depot; keine Kapazitäten (Folgestück **Kapazitierter MST**), keine echten Netze. Approximationsalgorithmen für Grad- und Längenbeschränkung (Fürer-Raghavachari, Haeupler u. a., "Simple Length-Constrained Minimum Spanning Trees", arXiv 2410.08170) sind nicht gebaut.
 - **NP-Schwere:** Gradbeschränkter Spannbaum ist für jedes Δ ≥ 2 NP-vollständig (Garey & Johnson 1979); der hop-beschränkte ist für allgemeine Kosten NP-schwer (in der Literatur schon für H = 2 gezeigt). Für euklidische Instanzen wird das hier nicht behauptet.
-- **Nicht gebaut:** Kapazitierter MST, Steiner-Bäume, Sensitivität, zufällige Spannbäume.
+- **Nachfolger (inzwischen gebaut):** Kapazitierter MST (cmst-demo), Steiner-Bäume (steiner-tree-demo, pcst-demo), Sensitivität (mst-sensitivity-demo), zufällige Spannbäume (random-spanning-tree-demo).
 
 ## Verifikation
 
@@ -115,4 +115,4 @@ python -m pytest tests -v
 - Gouveia, L. und Mitarbeiter: Modellierung des hop-beschränkten Spannbaums als Steiner-Baum-Problem über geschichtete Graphen (Mathematical Programming).
 - *Simple Length-Constrained Minimum Spanning Trees* (arXiv 2410.08170, Oktober 2024) - zur längenbeschränkten Variante; Autoren und Stand vor einer Zitierung gegen die Quelle prüfen.
 
-Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning.
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Spannbäume: vom Kruskal bis zum Zufallsbaum](https://sebastianhanisch.net/konzepte-spannbaum.html).
