@@ -82,7 +82,7 @@ Die Einzelinstanz weicht von den Medianen ab - die Mediane sind die belastbaren 
 - **Auch Lagrange kann leer ausgehen:** Ortschaften mit 6 Anschlüssen, 30 Filialen, Δ = 2, Seed 100002: kein Verfahren findet einen gültigen Baum; ob einer existiert, ist offen (das Exaktverfahren wird bei n = 30 nicht angeboten) - die App sagt dann "Kein Verfahren fand einen gültigen Baum", nicht "es gibt keinen".
 - **Exakt ist klein:** das Branch-and-Bound wird bis n = 24 (Grad) bzw. n = 12 (Hops) angeboten und ist bei enger Hop-Grenze (H = 2, 12 Filialen: in keiner der 5 Instanzen fertig) auch dort nicht immer fertig; ab n = 13 (Hops) misst die Demo keine Lücke der Heuristik mehr. **Für Hops gibt es keine Lagrange-Untergrenze** (nur den MST). Branch-and-Cut, Layered-Graph-Formulierungen (Gouveia u. a.) sind nicht gebaut.
 - **Aufwand ist nicht das Thema dieses Stücks:** die Demo vergleicht Kosten und Gültigkeit, keine Laufzeit und keine Elementarschritte; das Branch-and-Bound zählt nur Suchknoten (die Zahl wird bei den Presets genannt).
-- **Synthetisches Modell:** Punkte im Quadrat, k nächste Nachbarn, ein Depot; keine Kapazitäten (Folgestück **Kapazitierter MST**), keine echten Netze. Approximationsalgorithmen für Grad- und Längenbeschränkung (Fürer-Raghavachari, Haeupler u. a., "Simple Length-Constrained Minimum Spanning Trees", arXiv 2410.08170) sind nicht gebaut.
+- **Synthetisches Modell:** Punkte im Quadrat, k nächste Nachbarn, ein Depot; keine Kapazitäten (Folgestück **Kapazitierter MST**), keine echten Netze. Approximationsalgorithmen für Grad- und Längenbeschränkung (Fürer-Raghavachari; Hershkowitz & Huang, "Simple Length-Constrained Minimum Spanning Trees", arXiv 2410.08170) sind nicht gebaut.
 - **NP-Schwere:** Gradbeschränkter Spannbaum ist für jedes Δ ≥ 2 NP-vollständig (Garey & Johnson 1979); der hop-beschränkte ist für allgemeine Kosten NP-schwer (in der Literatur schon für H = 2 gezeigt). Für euklidische Instanzen wird das hier nicht behauptet.
 - **Nachfolger (inzwischen gebaut):** Kapazitierter MST (cmst-demo), Steiner-Bäume (steiner-tree-demo, pcst-demo), Sensitivität (mst-sensitivity-demo), zufällige Spannbäume (random-spanning-tree-demo).
 
@@ -113,6 +113,6 @@ python -m pytest tests -v
 - Volgenant, A. (1989). *A Lagrangean approach to the degree-constrained minimum spanning tree problem.* European Journal of Operational Research 39(3), 325–331.
 - Garey, M. R., & Johnson, D. S. (1979). *Computers and Intractability: A Guide to the Theory of NP-Completeness.* W. H. Freeman.
 - Gouveia, L. und Mitarbeiter: Modellierung des hop-beschränkten Spannbaums als Steiner-Baum-Problem über geschichtete Graphen (Mathematical Programming).
-- *Simple Length-Constrained Minimum Spanning Trees* (arXiv 2410.08170, Oktober 2024) - zur längenbeschränkten Variante; Autoren und Stand vor einer Zitierung gegen die Quelle prüfen.
+- Hershkowitz, D. E., & Huang, R. Z. (2024). *Simple Length-Constrained Minimum Spanning Trees.* arXiv 2410.08170 - zur längenbeschränkten Variante.
 
 Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Spannbäume: vom Kruskal bis zum Zufallsbaum](https://sebastianhanisch.net/konzepte-spannbaum.html).

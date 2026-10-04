@@ -141,7 +141,7 @@ with st.sidebar:
                              help="Je Knoten die k nächsten Nachbarn als Kandidaten. Bei kleinem k kann es gar keinen Baum mit Grenze geben (z. B. H = 1 braucht k = 1000).")
         terrain = st.select_slider("Geländezuschlag", options=list(C.TERRAIN_OPTIONS), value=float(ss["terrain_select"]), key="terrain_widget", on_change=store_from_widget, args=("terrain_select",),
                                    format_func=lambda v: "0 (euklidisch)" if v == 0 else f"{v:g}",
-                                   help="Kosten = Länge x Geländefaktor in [1, 1 + Zuschlag]. Ohne Zuschlag ist der MST-Grad auf gleichverteilten Instanzen höchstens 4; mit Zuschlag 1.0 kommen Grad 5 und 6 vor.")
+                                   help="Kosten = Länge x Geländefaktor in [1, 1 + Zuschlag]. Ohne Zuschlag war der MST-Grad in allen 300 gemessenen gleichverteilten Instanzen höchstens 4 (Grad 5 ist geometrisch möglich); mit Zuschlag 1.0 kommen Grad 5 und 6 vor.")
         round_costs = st.checkbox("Kosten auf ganze Einheiten runden", value=bool(ss["round_select"]), key="round_widget", on_change=store_from_widget, args=("round_select",),
                                   help="Erzeugt Gleichstände; die Bäume bleiben durch den Schlüssel (Kosten, Kantenindex) eindeutig.")
         if kind == "hubs":
@@ -390,7 +390,7 @@ st.markdown(
 | **Exakt lösbar** | Nur klein: das Branch-and-Bound wird bis n = 24 (Grad) bzw. n = 12 (Hops) angeboten und ist bei enger Hop-Grenze (H = 2) auch dort nicht immer fertig. Große Instanzen brauchen Branch-and-Cut (nicht gebaut). | Layered-Graph-/Schnittformulierungen (Gouveia u. a., nicht gebaut) |
 | **Für Hops gibt es eine Untergrenze** | Hier nur der MST selbst - viel zu schwach; die Lücke der Hop-Heuristik ist ab n = 13 nicht mehr messbar. | Lagrange/LP für Hops (nicht gebaut) |
 | **Euklidisch** | Der Satz "MST-Grad ≤ 6" gilt nur ohne Geländezuschlag; mit Zuschlag 1.0 kamen Grad 5 und 6 vor, in Ortschaften mit 5 Anschlüssen liegt der MST-Grad fast immer bei 5. | - |
-| **Synthetisches Modell** | Punkte im Quadrat, k nächste Nachbarn, ein Depot; keine Kapazitäten (Folgestück Kapazitierter MST), keine echten Netze. Approximationsalgorithmen für Grad- und Längenbeschränkung (Fürer-Raghavachari, Haeupler u. a.) sind nicht gebaut. | Echte Netze, Approximationsverfahren |
+| **Synthetisches Modell** | Punkte im Quadrat, k nächste Nachbarn, ein Depot; keine Kapazitäten (Folgestück Kapazitierter MST), keine echten Netze. Approximationsalgorithmen für Grad- und Längenbeschränkung (Fürer-Raghavachari; Hershkowitz & Huang) sind nicht gebaut. | Echte Netze, Approximationsverfahren |
 """
 )
 
@@ -414,8 +414,8 @@ für euklidische Instanzen wird das hier nicht behauptet.
 
 **Literatur.** Camerini, P. M. (1978). *The min-max spanning tree problem and some extensions.* Information Processing Letters 7(1), 10-14. Gabow, H. N., & Tarjan, R. E. (1988). *Algorithms for two bottleneck optimization problems.*
 Journal of Algorithms 9(3), 411-417. Volgenant, A. (1989). *A Lagrangean approach to the degree-constrained minimum spanning tree problem.* European Journal of Operational Research 39(3), 325-331. Garey, M. R., & Johnson, D. S.
-(1979). *Computers and Intractability.* Freeman. Gouveia, L. und Mitarbeiter: Modellierung des hop-beschränkten MST über geschichtete Graphen (Mathematical Programming). Zur längenbeschränkten Variante: *Simple Length-Constrained
-Minimum Spanning Trees* (arXiv 2410.08170, 2024).
+(1979). *Computers and Intractability.* Freeman. Gouveia, L. und Mitarbeiter: Modellierung des hop-beschränkten MST über geschichtete Graphen (Mathematical Programming). Zur längenbeschränkten Variante: Hershkowitz, D. E., & Huang, R. Z. (2024). *Simple Length-Constrained
+Minimum Spanning Trees.* arXiv 2410.08170.
 
 Implementiert in `cons_algorithm.py` (Verfahren), `cons_scenario.py` (Instanzen), `cons_evaluation.py` (Kennzahlen, Sweeps, Experimente).
         """
