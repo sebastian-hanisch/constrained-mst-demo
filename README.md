@@ -4,7 +4,7 @@
 
 Sechstes Stück der **Spannbaum-Reihe** der "Konzepte"-Reihe für die Website "Sebastian Hanisch – Operations Research und Machine Learning". Der minimale Spannbaum ist das Optimum ohne Nebenbedingung. Reale Netze haben Grenzen: ein **Verteiler hat nur Δ Anschlüsse** (Knotengrad), ein **Signal darf nur H Sprünge vom Depot** laufen (Hops), das **schwächste Glied** - die längste Leitung - soll kurz sein (Bottleneck). Der MST ist für den Bottleneck schon optimal, aber weder grad- noch hop-optimal; die beiden letzten Nebenbedingungen machen das Problem **NP-schwer** (Grad Δ = 2 ist ein Hamiltonpfad). Die Demo misst, **was jede Grenze kostet**, ob die einfachen Greedy-Verfahren überhaupt einen gültigen Baum finden, wie nah eine **Lagrange-Untergrenze** (Knotenstrafen, Volgenant 1989) und ein exaktes **Branch-and-Bound** (nur kleine Instanzen) an den besten Baum herankommen und was die Hop-Grenze am **Umweg** ändert. Der Kruskal-Baum aus [kruskal-demo](../kruskal-demo) ist der Ausgangspunkt.
 
-**Einordnung in die Reihe:** geplant sind elf Stücke, dies ist das sechste:
+**Einordnung in die Reihe:** die Reihe hat elf Stücke, dies ist das sechste:
 
 ```
 Kruskal (Wurzel)                                                                           [gebaut: kruskal-demo]
